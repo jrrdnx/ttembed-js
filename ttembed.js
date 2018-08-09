@@ -39,7 +39,7 @@ module.exports = function ttembed(config, callback) {
         var ftype = readbe32(fd);
         if (ftype !== 0x00010000 && ftype !== 0x4f54544f) {
             fs.closeSync(fd);
-            return callback(filename + ': Not TTF/OTF');
+            return callback(config.filename + ': Not TTF/OTF');
         }
         try {
             fs.seekSync(fd, 12, 0);
@@ -90,7 +90,7 @@ module.exports = function ttembed(config, callback) {
         } catch (e) {
             fs.closeSync(fd);
             if (e instanceof MalformedTTFError) {
-                return callback(filename + ': Malformed TTF');   
+                return callback(config.filename + ': Malformed TTF');   
             }
             throw e;
         }
